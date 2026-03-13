@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int t = sc.nextInt();
+        
+        while(t-- > 0){
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            
+            for(int i=0; i<n; i++){
+                arr[i] = sc.nextInt();
+            }
+            
+            findMaxArray(arr,n);
+            
+            for(int x: arr){
+                System.out.print(x+" ");
+            }
+            System.out.println();
+        }
+        
+        sc.close();
+    }
+    
+    public static void findMaxArray(int[] arr, int n){
+        int left = 0;
+        int maxValue = n;
+        
+        while(left<n){
+            if(arr[left] == maxValue){
+                left++;
+                maxValue--;
+            } else{
+                int right = n-1;
+                while(arr[right] != maxValue){
+                    right--;
+                }
+                reverse(arr,left,right);
+                return;
+            }
+        }
+    }
+    
+    private static void reverse(int[] arr, int left, int right){
+        int idx = 0;
+        for(int i=left; i<=right/2; i++){
+            int temp = arr[i];
+            arr[i] = arr[right-idx];
+            arr[right-idx] = temp;
+            idx++;
+        }
+    }
+}
