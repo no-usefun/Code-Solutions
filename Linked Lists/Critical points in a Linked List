@@ -1,0 +1,15 @@
+class Solution{
+    static int solve(Node root){
+        int count = 0;
+        Node temp = root;
+        while(temp.next.next!=null){
+            int backward = temp.val;
+            int current = temp.next.val;
+            int forward = temp.next.next.val;
+            if(current > backward && current > forward) count++;
+            if(current < backward && current < forward) count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+}

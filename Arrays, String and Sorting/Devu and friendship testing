@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+    	Scanner sc = new Scanner(System.in);
+    	
+    	int t = sc.nextInt();
+    	
+    	while(t-- > 0){
+    	    int n = sc.nextInt();
+    	    boolean[] arr = new boolean[101];
+    	    for(int i=0; i<n; i++){
+    	        int day = sc.nextInt();
+    	        arr[day] = true;
+    	    }
+    	    
+    	    int count = 0;
+    	    for(int i=0; i<101; i++){
+    	        if(arr[i]) count++;
+    	    }
+    	    
+    	    System.out.println(count);
+    	    
+    	}
+    	
+    	sc.close();
+
+	}
+}

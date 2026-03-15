@@ -1,0 +1,41 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception, IOException
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int size = Integer.parseInt(br.readLine());
+        
+        while(size--!=0){
+            String[] input = br.readLine().trim().split(" ");
+            int n = Integer.parseInt(input[0]);
+            int k = Integer.parseInt(input[1]);
+            String[] arr_inp = br.readLine().trim().split(" ");
+            int[] arr = new int[n];
+            int i=0;
+            for(String s:arr_inp){
+                arr[i++] = Integer.parseInt(s);
+            }
+            System.out.println(findMaxWeightDifference(n,k,arr));
+        }
+        br.close();
+	}
+	
+	public static int findMaxWeightDifference(int n, int k, int[] arr){
+	    int diff = 0;
+	    Arrays.sort(arr);
+	    int child = (k>n/2)? n-k: k;
+	    
+	    for(int i=0; i<n; i++){
+	        if(i<child){
+	            diff -= arr[i];
+	        } else{
+	            diff += arr[i];
+	        }
+	    }
+	    return diff;
+    }
+}

@@ -1,0 +1,45 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef {
+    static int n;
+    static int[] a = new int[301];
+    static int[] dp = new int[301];
+
+    static int isPalin(int i, int j) {
+        int length = j - i + 1;
+        for (int it = 0; it < length / 2; it++) {
+            if (a[i + it] != a[j - it]) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    static int recur(int cur) {
+        if (dp[cur] != -1)
+            return dp[cur];
+        else {
+            int ans = Integer.MAX_VALUE;
+            for (int i = cur; i < n; i++) {
+                if (isPalin(cur, i) == 1) {
+                    ans = Math.min(ans, recur(i + 1) + 1);
+                }
+            }
+            return dp[cur] = ans;
+        }
+    }
+
+    public static void main(String[] args) throws java.lang.Exception {
+        Arrays.fill(dp, -1);
+        Scanner scanner = new Scanner(System.in);
+        n = scanner.nextInt();
+        dp[n] = 0;
+        for (int i = 0; i < n; i++) {
+            a[i] = scanner.nextInt();
+        }
+        System.out.println(recur(0));
+        scanner.close();
+    }
+}

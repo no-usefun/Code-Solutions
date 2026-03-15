@@ -1,0 +1,59 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int t = Integer.parseInt(br.readLine());
+		
+		while(t-- > 0){
+		    String[] input = br.readLine().trim().split(" ");
+		    int N = Integer.parseInt(input[0]);
+		    int M = Integer.parseInt(input[1]);
+		    int H = Integer.parseInt(input[2]);
+		    String[] cars_inp = br.readLine().trim().split(" ");
+		    String[] outlets_inp = br.readLine().trim().split(" ");
+		    int[] cars = new int[N];
+		    int[] outlets = new int[M];
+		    
+		    for(int i=0; i<N; i++){
+		        cars[i] = Integer.parseInt(cars_inp[i]);
+		    }
+		    
+		    for(int i=0; i<M; i++){
+		        outlets[i] = Integer.parseInt(outlets_inp[i]);
+		    }
+		    
+		    System.out.println(findMaxPower(cars, outlets, H, N, M));
+		}
+		
+        br.close();
+	}
+	
+	public static long findMaxPower(int[] cars, int[] outlets, int h, int n, int m){
+	    
+	    Arrays.sort(cars);
+	    Arrays.sort(outlets);
+	    reverse(cars,n);
+	    reverse(outlets,m);
+	    
+	    long maxPower = 0;
+	    
+	    for(int i=0; i< Math.min(n,m); i++){
+	        maxPower += Math.min((long)cars[i], (long)outlets[i]*h);
+	    }
+	    
+	    return maxPower;
+	}
+	
+	public static void reverse(int[] arr, int n){
+	    for(int i=0; i<n/2; i++){
+	        int temp = arr[i];
+	        arr[i] = arr[n-i-1];
+	        arr[n-i-1] = temp;
+	    }
+	}
+}

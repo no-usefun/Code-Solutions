@@ -1,0 +1,11 @@
+class Solution {
+    public String checkOddPairs(int a, int b, int c) {
+        int count = 0;
+        
+        if((a&1)==1) count++;
+        if((b&1)==1) count++;
+        if((c&1)==1) count++;
+        
+        return count%3==0? "NO":"YES";
+    }
+}

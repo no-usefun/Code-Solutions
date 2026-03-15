@@ -1,0 +1,24 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    
+	    int t = Integer.parseInt(br.readLine().trim());
+	    
+	    while(t-- > 0){
+	        int n = Integer.parseInt(br.readLine().trim());
+	        int xor = 0;
+	        while(n-- > 0){
+	            int in = Integer.parseInt(br.readLine().trim());
+	            xor ^= in;
+	        }
+	        System.out.println(xor);
+	    }
+
+	}
+}

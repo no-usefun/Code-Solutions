@@ -1,0 +1,36 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int t = Integer.parseInt(br.readLine());
+		
+		for(int i=0; i<t; i++){
+		    int x = Integer.parseInt(br.readLine());
+		    System.out.println(findDenomination(x));
+		}
+        br.close();
+	}
+	
+	public static int findDenomination(int x){
+	    int rupee = 100;
+	    
+	    if(x%10==0){
+	        return rupee-x;
+	    } else{
+	        if(x%10<5){
+	            x/=10;
+	            x*=10;
+	        } else{
+	            x = x/10 + 1;
+	            x*=10;
+	        }
+	        return rupee-x;
+	    }
+	}
+}

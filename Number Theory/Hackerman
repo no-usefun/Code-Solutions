@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int t = Integer.parseInt(br.readLine());
+		
+		while(t-- > 0){
+		    String[] input = br.readLine().trim().split(" ");
+		    int a = Integer.parseInt(input[0]);
+		    int b = Integer.parseInt(input[1]);
+		    System.out.println(primeNumber(a,b) ? "Alice":"Bob");
+		}
+        br.close();
+	}
+	
+	public static boolean primeNumber(int a, int b){
+	    int sum = a+b;
+	    
+	    for(int i=2; i<=Math.sqrt(sum); i++){
+	        if(sum%i==0){
+	            return false;
+	        }
+	    }
+	    
+	    return true;
+	}
+}

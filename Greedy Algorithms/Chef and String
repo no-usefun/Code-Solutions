@@ -1,0 +1,37 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int t = Integer.parseInt(br.readLine());
+		
+		while(t-- > 0){
+		    String students = br.readLine().trim();
+		    System.out.println(findPairs(students.toCharArray()));
+		}
+        br.close();
+	}
+	
+	public static int findPairs(char[] student){
+	    int pairs = 0;
+	    int i=0;
+	    int size = student.length;
+	    if(size==0) return pairs;
+	    
+	    while(i<size-1){
+	        if((student[i]=='x' && student[i+1]=='y') || (student[i]=='y' && student[i+1]=='x')){
+	            i += 2;
+	            pairs++;
+	        } else{
+	            i++;
+	        }
+	    }
+	    
+	    return pairs;
+	}
+}

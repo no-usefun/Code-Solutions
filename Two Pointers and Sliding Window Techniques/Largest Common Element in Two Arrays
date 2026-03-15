@@ -1,0 +1,22 @@
+
+public class Main {
+    public static int largestCommonElement(int[] arr1, int[] arr2) {
+        int n = arr1.length;
+        int m = arr2.length;
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+        int i = n-1;
+        int j = m-1;
+        
+        while(i>=0 && j>=0){
+            if(arr1[i] == arr2[j]){
+                return arr1[i];
+            } else if(arr1[i] > arr2[j]){
+                i--;
+            } else{
+                j--;
+            }
+        }
+        
+        return -1;
+    }

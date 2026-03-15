@@ -1,0 +1,53 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int t = Integer.parseInt(br.readLine().trim());
+		
+		while(t-- > 0){
+		    int n = Integer.parseInt(br.readLine().trim());
+		    int[] A = new int[n];
+		    int[] B = new int[n];
+		    
+		    String[] input_A = br.readLine().trim().split(" ");
+		    String[] input_B = br.readLine().trim().split(" ");
+		    
+		    for(int i=0; i<n; i++){
+		        A[i] = Integer.parseInt(input_A[i]);
+		        B[i] = Integer.parseInt(input_B[i]);
+		    }
+		    
+		    System.out.println(findMaximumCommon(A,B,n));
+		}
+		
+		br.close();
+
+	}
+	
+	public static int findMaximumCommon(int[] A, int[] B, int n){
+	    int count=0;
+	    
+	    Arrays.sort(A);
+	    Arrays.sort(B);
+	    int i=0, j=0;
+	    
+	    while(i<n  && j<n){
+	        if(A[i]==B[j]){
+	            count++;
+	            i++;
+	            j++;
+	        } 
+	        else if(A[i] > B[j]) j++;
+	        else i++;
+	    }
+	    
+	    
+	    return count;
+	}
+}
