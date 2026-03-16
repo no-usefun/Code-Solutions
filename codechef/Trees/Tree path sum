@@ -1,0 +1,25 @@
+class Solution {
+    boolean solution(int n, int target_sum, List<List<Integer>> adj) {
+        return dfs(1,-1,adj,target_sum);
+    }
+    
+    static boolean dfs(int node, int parent, List<List<Integer>> adj, int sum){
+        
+        int child = 0;
+        
+        for(int neighbor: adj.get(node)){
+            if(neighbor!=parent){
+                child++;
+                if(dfs(neighbor, node, adj, sum-node)){
+                    return true;
+                }
+            }
+        }
+        
+        if(child==0){
+            return sum == node;
+        }        
+        
+        return false;
+    }
+}
