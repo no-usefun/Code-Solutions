@@ -1,3 +1,4 @@
 # CodeChef
 CodeChef solved problems
-Day Streak - 9
+Day - 10
+Streak - 1
