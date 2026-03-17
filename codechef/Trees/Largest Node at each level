@@ -1,0 +1,57 @@
+import java.util.*;
+
+class Codechef{
+	public static void main (String[] args) throws java.lang.Exception{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		List<List<Integer>> adj = new ArrayList<>(n+1);
+		
+		for(int i=0; i<=n; i++){
+		    adj.add(new ArrayList<>());
+		}
+		
+		for(int i=1; i<n; i++){
+		    int u = sc.nextInt();
+		    int v = sc.nextInt();
+		    
+		    adj.get(u).add(v);
+		    adj.get(v).add(u);
+		}
+		
+		
+		bfs(1, adj);
+	}
+	
+	static void bfs(int node, List<List<Integer>> adj){
+	    Queue<Integer> q =  new LinkedList<>();
+	    q.add(node);
+	    
+	    boolean[] visited = new boolean[adj.size()];
+	    visited[node] = true;
+	    
+	    List<Integer> maxNodes = new ArrayList<>();
+	    
+	    while(!q.isEmpty()){
+	        int size = q.size();
+	        int maxAtLevel = Integer.MIN_VALUE;
+	        for(int i=0; i<size; i++){
+    	        int curr = q.poll();
+	            maxAtLevel = Math.max(maxAtLevel, curr);
+    	        for(int neighbor: adj.get(curr)){
+        	        if(visited[neighbor]==false){
+        	            q.add(neighbor);
+        	            visited[neighbor] = true;
+        	        }
+    	        }
+	        }
+	        maxNodes.add(maxAtLevel);
+	    }
+	    
+	    System.out.println(maxNodes.size());
+	    for(int n: maxNodes){
+	        System.out.print(n + " ");
+	    }
+	    
+	}
+}

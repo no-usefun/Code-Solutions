@@ -1,0 +1,65 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Codechef
+{
+    static int[] colors;
+    static List<List<Integer>> adj;
+    static int[] dist_color;
+    
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		adj = new ArrayList<>(n+1);
+		
+		for(int i=0; i<=n; i++){
+		    adj.add(new ArrayList<>());
+		}
+		
+		colors = new int[n+1];
+		
+		for(int i=1; i<n+1; i++) colors[i] = sc.nextInt();
+		
+		for(int i=1; i<n; i++){
+		    int u = sc.nextInt();
+		    int v = sc.nextInt();
+		    
+		    adj.get(u).add(v);
+		    adj.get(v).add(u);
+		}
+		
+		dist_color = new int[n+1];
+		dfs(1,-1);
+		
+		for(int i=1; i<=n; i++){
+		    System.out.print(dist_color[i] + " ");
+		}
+		
+		sc.close();
+	}
+	
+	static HashSet<Integer> dfs(int node, int parent){
+	    
+	    HashSet<Integer> set = new HashSet<>();
+	    set.add(colors[node]);
+	    
+	    for(int neighbor: adj.get(node)){
+	        if(neighbor != parent){
+	            HashSet<Integer> childSet = dfs(neighbor, node);
+	            
+	            if(set.size() < childSet.size()){
+	                HashSet<Integer> temp = set;
+                    set = childSet;
+                    childSet = temp;
+	            }
+	            set.addAll(childSet);
+	        }
+	    }
+	    
+	    dist_color[node] = set.size();
+	    return set;
+	}
+}

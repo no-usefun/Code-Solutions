@@ -1,0 +1,47 @@
+import java.util.*;
+
+class Codechef{
+    static List<List<Integer>> adj;
+    static int[] coins;
+    
+	public static void main (String[] args) throws java.lang.Exception{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		adj = new ArrayList<>(n+1);
+		
+		coins = new int[n+1];
+		
+		for(int i=1; i<=n; i++) coins[i] = sc.nextInt();
+		
+		for(int i=0; i<=n; i++){
+		    adj.add(new ArrayList<>());
+		}
+		
+		for(int i=1; i<n; i++){
+		    int u = sc.nextInt();
+		    int v = sc.nextInt();
+		    adj.get(u).add(v);
+		    adj.get(v).add(u);
+		}
+		
+		System.out.println(dfs(1,-1));
+	}
+	
+	static int dfs(int node, int parent){
+	    
+	    int total_time = 0;
+	    
+	    for(int neighbor: adj.get(node)){
+	        if(neighbor != parent){
+	            int subTreetime = dfs(neighbor, node);
+	            
+	            if(subTreetime > 0 || coins[neighbor]==1){
+	                total_time += subTreetime + 2;
+	            }
+	        }
+	    }
+	    
+	    return total_time;
+	}
+}
