@@ -1,0 +1,106 @@
+import java.io.*;
+import java.util.*;
+
+public class Treasure_Island{
+
+    static int[] dr = {0,1};
+    static int[] dc = {1,0};
+    static int[][] maze;
+    static boolean vis[][];
+    
+    static boolean dfs(int sx, int sy){
+
+        int r = maze.length;
+        int c = maze[0].length;
+
+        int[][] parentX = new int[r][c];
+        int[][] parentY = new int[r][c];
+
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++){
+                parentX[i][j] = -1;
+                parentY[i][j] = -1;
+            }
+
+        Stack<int[]> st = new Stack<>();
+        st.push(new int[]{sx,sy});
+
+        while(!st.isEmpty()){
+
+            int[] cur = st.pop();
+            int x = cur[0];
+            int y = cur[1];
+
+            if(x<0 || y<0 || x>=r || y>=c) continue;
+            if(maze[x][y]==0 || vis[x][y]) continue;
+
+            vis[x][y] = true;
+
+            if(x==r-1 && y==c-1){
+
+                while(!(x==0 && y==0)){
+                    int px = parentX[x][y];
+                    int py = parentY[x][y];
+
+                    maze[x][y] = 0;
+
+                    x = px;
+                    y = py;
+                }
+
+                return true;
+            }
+
+            for(int i=0;i<2;i++){
+                int nx = x + dr[i];
+                int ny = y + dc[i];
+
+                if(nx>=0 && ny>=0 && nx<r && ny<c && !vis[nx][ny] && maze[nx][ny]==1){
+
+                    parentX[nx][ny] = x;
+                    parentY[nx][ny] = y;
+
+                    st.push(new int[]{nx,ny});
+                }
+            }
+        }
+
+    return false;
+}
+
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] inp = br.readLine().trim().split(" ");
+        int r = Integer.parseInt(inp[0]);
+        int c = Integer.parseInt(inp[1]);
+
+        maze = new int[r][c];
+
+        for(int i=0; i<r; i++){
+            String row = br.readLine();
+            for(int j=0; j<c; j++){
+                if(row.charAt(j)=='.'){
+                    maze[i][j] = 1;
+                } else{
+                    maze[i][j] = 0;
+                }
+            }
+        }
+
+        vis = new boolean[r][c];
+        if(!dfs(0,0)) {
+            System.out.println(0);
+            return;
+        }
+
+        vis = new boolean[r][c];
+        if(dfs(0,0)) {
+            System.out.println(2);
+            
+        } else{
+            System.out.println(1);
+        }
+
+        br.close();
+    }
+}
